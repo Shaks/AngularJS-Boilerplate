@@ -1,0 +1,20 @@
+{
+  "name": "AngularJS_Boilerplate",
+  "version": "0.0.0",
+  "authors": [
+    "Shakir Windows <shakirkhan02@yahoo.com>"
+  ],
+  "description": "Boilerplate for AngularJS app",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "~1.2.26",
+    "twitter": "~3.2.0"
+  }
+}
