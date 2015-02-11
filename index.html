@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Virgin Media Test</title>
+    <link rel="stylesheet" href="public/css/bootstrap.min.css"/>
+    <script src="public/js/jquery-1.9.0.min.js"></script>
+</head>
+<body>
+
+	<h1>Hello World</h1>
+
+	<div class="container">
+		<button id="btn-1" class="btn btn-primary">Primary</button>
+		<hr />
+		<button id="btn-2" class="btn btn-secondary">Secondary</button>
+	</div>
+
+<script>
+	$(document).ready(function(){
+		// var getUpsellOffers = (function($, window, undefined) {
+				
+		// 	var cacheOffersdata;
+
+		// 	var dataLoaded = function (json) {
+		// 		cacheOffersdata = json;
+		// 	}
+
+		// 	var loadOffers = function (url) {
+		// 		var jqxhr = $.getJSON(url)
+		// 	  .done(function(json) {
+		// 	    console.log(json);
+		// 	    cacheOffersdata = json;
+		// 	    alert(cacheOffersdata);
+		// 	  })
+		// 	  .fail(function(xhr, status, error) {
+		// 	    console.log( "error" );
+		// 	  })
+		// 	  .always(function() {
+		// 	    console.log('always');
+		// 	  });
+ 	// 		}
+			
+		// 	return {
+		// 		cache : cacheOffersdata,
+		// 		offers: loadOffers,
+		// 		dataLoadedSet : dataLoaded
+		// 	}
+
+		// })(jQuery, window);
+		var url = "{"widget": {
+	    "debug": "on",
+	    "window": {
+	        "title": "Sample Konfabulator Widget",
+	        "name": "main_window",
+	        "width": 500,
+	        "height": 500
+	    },
+	    "image": { 
+	        "src": "Images/Sun.png",
+	        "name": "sun1",
+	        "hOffset": 250,
+	        "vOffset": 250,
+	        "alignment": "center"
+	    },
+	    "text": {
+	        "data": "Click Here",
+	        "size": 36,
+	        "style": "bold",
+	        "name": "text1",
+	        "hOffset": 250,
+	        "vOffset": 100,
+	        "alignment": "center",
+	        "onMouseUp": "sun1.opacity = (sun1.opacity / 100) * 90;"
+   	 }
+		}}";
+		var data;
+		var cache;
+		
+		$('.btn').on('click', function (e) {
+				if(!data) {
+					alert(data);
+					$.getJSON(url)
+				  .done(function(json) {
+				    console.log(json);
+				    data = 'true';
+				    cache = json;
+				  })
+				  .fail(function(xhr, status, error) {
+				    console.log( "error" );
+				  })
+				  .always(function() {
+				    console.log('always');
+				  });
+				} else {
+					console.log('use loaded one');
+					console.log(cache.widget.debug+' cache');
+				}
+		});
+});
+</script>
+</body>
+</html>
+
+
