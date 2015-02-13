@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Virgin Media Test</title>
+    <link rel="stylesheet" href="public/css/bootstrap.min.css"/>
+    <script src="public/js/jquery-1.9.0.min.js"></script>
+</head>
+<body>
+
+	<div class="container">
+		<ul class="nav nav-tabs">
+		  <li class="tab" role="offers" class="active"><a href="#">My Package</a></li>
+		  <li class="tab" role="offers"><a href="#">Broadband</a></li>
+		  <li class="tab" role="offers"><a href="#">TV</a></li>
+		  <li class="tab" role="offers"><a href="#">Phone</a></li>
+		</ul>
+	</div>
+
+	<div class="currentHoldings">
+		<div class="col-xs-12 currentPackageCol">
+			<div class="row packageCollection" style="height: 175px;">
+				
+				<div class="currentPackage">
+					<div class="col-xs-3 packageDesc" style="height: 100%;">	
+						<h4 class="pkgTitle">My Package</h4>
+						<p class="pkgName">Big Kuhuna Bundle</p>
+						<p class="pkgPrice">&pound;35<span class="shortText"> a month</span></p>
+						<a class="coreButton" href="#">Offers &amp; Upgrades</a>
+					</div>
+				</div>
+
+				<div class="currentBundle">
+					<div class="col-xs-3 packageItem productColumn" style="height: 100%;">
+						<h4>Broadband</h4>
+						<i class="fa fa-vm-broadband fa-fw productIcon">&#xe600;</i>								
+						<p class="serviceType">Up to 152Mb</p>
+						<p class="noServiceText">No Broadband Service</p>
+						<a href="#" class="coreButton">Upgrade</a>
+					</div>
+
+
+					<div class="col-xs-3 packageItem productColumn" style="height: 100%;">
+						<h4>TV</h4>
+						<i class="fa fa-vm-tv fa-fw productIcon">&#xe605;</i>								
+						<p class="serviceType">230+ Channels</p>
+						<p class="noServiceText">No Tv Service</p>
+						<a href="#" class="coreButton">Upgrade</a>
+					</div>
+
+					<div class="col-xs-3 packageItem" style="height: 100%;">
+						<h4>Phone</h4>
+						<i class="fa fa-vm-phone fa-fw productIcon">&#xe603;</i>								
+						<p class="serviceType">Talk Unlimited Extra</p>
+						<p class="noServiceText">No Phone Service</p>
+						<a href="#" class="coreButton">Upgrade</a>
+					</div>	
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+
+
+
+
+<script>
+	$(document).ready(function(){
+
+		$('.packageCollection').css('visibility', 'hidden');
+
+		var currentPackage = $.parseHTML($('.currentPackage').html());
+		//console.log($(currentPackage).find('.pkgTitle').text());
+		var title = $(currentPackage).find('.pkgTitle').text();
+		title.replace()
+
+		var currentBundle = $('.currentBundle').html();
+		console.log(currentBundle);
+
+		
+
+
+
+		var getUpsellOffers = (function($, window) {
+				
+			var init = function () {
+				var url = 'data/data.js';
+				fetch(url);
+				console.log(self.bundle);
+ 			}
+
+ 			var fetch = function (url) {
+ 				var self = this;
+				$.getJSON(url, function (json) {
+					//Get Bundle data
+					self.bundle = [];
+					 $.map(json.holdings, function (package) {
+						if(typeof package === 'string') {
+							self.bundle.push(package);
+						}
+					});
+
+					//Get Packages data
+					var packages =  $.map(json.holdings, function (package, i) {
+							if(typeof package === 'object') {
+								return {
+									title: i,
+									tier: package.tier,
+									name: package.name,
+									extras: package.extras
+								}
+							}
+						});
+					generatePackagesHTML(packages);
+					generateBundleHTML(bundle);
+ 				});
+ 			}
+
+ 			var generatePackagesHTML =  function (packages) {
+ 				var div = $('<div id="shakir"></div>');
+ 				$.each(packages, function(i, data) {
+					var html = '<div class="col-xs-3 packageItem">'+
+												'<h4>'+data.title+'</h4>'+
+												'<p class="serviceType">'+data.name+'</p>'+
+												'<p class="noServiceText">No Broadband Service</p>'+
+												'<a href="#" class="coreButton">Upgrade</a>'+
+											'</div>';
+					$(div).append(html);
+ 				});
+ 				$('body').append(div);
+ 			}
+
+ 			var generateBundleHTML =  function (bundle) {
+ 				//console.log(bundle);
+ 			}
+
+ 			init();
+
+		})(jQuery, window);
+
+	});
+
+
+
+
+
+	</script>
+
+</body>
+</html>
+
+

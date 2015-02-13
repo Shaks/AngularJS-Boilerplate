@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Virgin Media Test</title>
+    <link rel="stylesheet" href="public/css/bootstrap.min.css"/>
+    <script src="public/js/jquery-1.9.0.min.js"></script>
+</head>
+<body>
+
+	<div class="container">
+		<ul class="nav nav-tabs">
+		  <li class="tab" role="offers" class="active"><a href="#">My Package</a></li>
+		  <li class="tab" role="offers"><a href="#">Broadband</a></li>
+		  <li class="tab" role="offers"><a href="#">TV</a></li>
+		  <li class="tab" role="offers"><a href="#">Phone</a></li>
+		</ul>
+	</div>
+
+
+
+
+
+
+<script>
+
+(function(){
+
+	var DisplayPackageOffers = {
+
+		init: function () {
+			this.url = 'data/data.js';
+			this.fetchJSON();
+			console.log(this.packages);
+		},
+
+		fetchJSON: function () {
+			var self = this;
+			$.getJSON(this.url, function (json) {
+				//Get Bundle data
+				 self.bundle = [];
+				 $.map(json.holdings, function (package) {
+					if(typeof package === 'string') {
+						self.bundle.push(package);
+					}
+				});
+
+				//Get Packages data
+				self.packages =  $.map(json.holdings, function (package, i) {
+						if(typeof package === 'object') {
+							return {
+								title: 	i,
+								tier: 	package.tier,
+								name: 	package.name,
+								extras: package.extras
+							}
+						}
+					});
+
+					console.log(self.packages);
+					console.log(self.bundle);
+
+				});
+		},
+
+		fetchPremiumExtras: function () {
+
+		},
+	};
+
+	DisplayPackageOffers.init();
+
+})();
+
+
+
+
+
+	</script>
+
+</body>
+</html>
+
+
